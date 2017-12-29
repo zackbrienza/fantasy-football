@@ -1,11 +1,10 @@
 #Scott Dickson
 #12/21/2017
 #Framework to train the linear prediction model
-#X - n by d
-#Y - n by 1
-#Theta - d by 1
+#dim(X):  n by d
+#dim(Y): n by 1
+#dim(Theta): d by 1
 #Error: ||X*Theta-Y||^2
-
 
 import numpy as np
 
@@ -21,8 +20,6 @@ def gradient(X, Y, Theta):
 #Run gradient descent for up to t steps
 def optimize(x, y, alpha=0.05, t = 1000):
     d = len(x[0])
-    print("D = " + str(d))
-    print("Alpha = " + str(alpha))
     param = np.zeros((d,1)) #Initialize the parameter vector
     steps = 0
     while(steps < t):
