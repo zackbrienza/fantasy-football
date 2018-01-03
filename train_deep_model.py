@@ -28,11 +28,22 @@ def init_network(d, layers):
         Thetas[i+1] = np.zeros((w,w))
        
     Thetas[layers - 1] = np.zeros((1,w)) if layers != 1 else np.zeros((1,d))
-        
+ 
+#Run an iteration of the backpropogation algorithm
+def backpropogation():
+    layers = len(Thetas)
+    deltas = np.zeros(layers)
+    #Implement from the hw6 documents 
+    for i in reversed(range(layers)):
+        pass
     
 def optimize(X, Y, layers,alpha=0.05,t=1000):
     steps = 0
     init_network(layers)  
+    
+    
+    
+    
     
 
 if __name__ == '__main__':
