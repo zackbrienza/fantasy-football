@@ -4,7 +4,7 @@
 #All take an adjacency list of size n^2 where n is
 #the number of vertices in the graph
 
-import Queue
+from Queue import Queue
 
 #Try to find a path fromt the start node to the end node
 #If found return a list of edges. Nil will be returned if
@@ -21,16 +21,19 @@ def bfs(adj, start, end):
         
     while not q.empty():
         temp = q.get()
+        print(temp)
         visited[temp] = True
+        
         if temp == end:
             break
         
         for i in range(n):
-            if adj[temp][i] == 1 and visited[adj[temp][i]]:
-                q.put(adj[temp][i])
+            if adj[temp][i] == 1 and not visited[i]:
+                q.put(i)
     
     #Path not found
     if not visited[end]:
+        print(visited)
         return []
     else:
     #Backtrack and recover the path    
@@ -48,7 +51,7 @@ def bfs(adj, start, end):
 #Generate a maximum flow assignment of flow on each edge
 def ford_fulkerson(adj,cap,s,t):
     n = len(adj[0])
-    flow = n*[n*[0]] #No flow on the graph initially
+    flow = [[0 for x in range(num)] for y in range(num)] #No flow on the graph initially
     max_flow = False
     
     while not max_flow:
@@ -122,16 +125,18 @@ def augment(adj,flow,cap,path):
 
 
 #Graph class for easy use and testing 
-class Graph():
-    self.n = 0
-    self.adj = []
+class Graph:
+    
+    def __init__(self):
+        self.n = 0
+        self.adj = []
 
-    def setNodes(num):
-        self.n = n
-        self.adj = n*[n*[0]]
-    def add_edge(start,end):
+    def setNodes(self,num):
+        self.n = num
+        self.adj = [[0 for x in range(num)] for y in range(num)]
+    def add_edge(self,start,end):
         self.adj[start][end] = 1
-    def getAdj():
+    def getAdj(self):
         return self.adj
     
 
@@ -140,4 +145,21 @@ class Graph():
 
 
 if __name__ == '__main__':
-    print("Not yet")
+    g = Graph()
+    
+    g.setNodes(8)
+    g.add_edge(0,1)
+    g.add_edge(0,5)
+    g.add_edge(1,5)
+    g.add_edge(5,6)
+    g.add_edge(6,7)
+    g.add_edge(5,7)
+    
+    g.add_edge(1,2)
+    g.add_edge(2,3)
+    g.add_edge(3,4)
+    
+    print(bfs(g.getAdj(),0,4))
+    
+    
+    
